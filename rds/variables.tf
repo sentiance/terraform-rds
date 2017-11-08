@@ -111,3 +111,8 @@ variable "tags" {
    type        = "map"
    default     = {}
  }
+
+ variable "name" {
+   description = "A name used to identify an RDS in a project that has more than one RDS"
+   default     = ""
+ }
