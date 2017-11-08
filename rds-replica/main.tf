@@ -13,11 +13,15 @@ resource "aws_db_instance" "rds" {
   final_snapshot_identifier = "${var.project}-${var.environment}${var.name}-rds${var.number}-final-${md5(timestamp())}"
   db_subnet_group_name      = "${aws_db_subnet_group.rds.id}"
 
-  tags {
-    Name        = "${var.project}-${var.environment}${var.name}-rds${var.number}-replica"
-    Environment = "${var.environment}"
-    Project     = "${var.project}"
-  }
+
+  tags = "${merge("${var.tags}",
+    map("Name", "${var.environment}.${var.project}.${var.name}.replica.${var.number}",
+      "service", "${var.name}",
+      "environment", "${var.environment}",
+      "stack", "${var.project}"))
+  }"
+
+
   lifecycle {
     ignore_changes = ["final_snapshot_identifier","replicate_source_db"]
   }

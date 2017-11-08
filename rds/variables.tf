@@ -105,3 +105,9 @@ variable "availability_zone" {
 variable "snapshot_identifier" {
   default = ""
 }
+
+variable "tags" {
+  description = "Optional tags"
+   type        = "map"
+   default     = {}
+ }

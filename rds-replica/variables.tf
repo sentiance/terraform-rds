@@ -54,3 +54,9 @@ variable "number" {
 variable "availability_zone" {
   default = ""
 }
+
+variable "tags" {
+   description = "Optional tags"
+   type        = "map"
+   default     = {}
+ }

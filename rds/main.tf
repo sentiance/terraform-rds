@@ -110,11 +110,12 @@ resource "aws_db_instance" "rds" {
   availability_zone         = "${var.availability_zone}"
   snapshot_identifier       = "${var.snapshot_identifier}"
 
-  tags {
-    Name        = "${var.project}-${var.environment}${var.tag}-rds${var.number}"
-    Environment = "${var.environment}"
-    Project     = "${var.project}"
-  }
+  tags = "${merge("${var.tags}",
+    map("Name", "${var.environment}.${var.project}.${var.name}.master.${var.number}",
+      "service", "${var.name}",
+      "environment", "${var.environment}",
+      "stack", "${var.project}"))
+  }"
 
   lifecycle {
     ignore_changes = ["final_snapshot_identifier"]
