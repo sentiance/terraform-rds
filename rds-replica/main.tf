@@ -5,7 +5,7 @@ resource "aws_db_subnet_group" "rds" {
 }
 
 resource "aws_db_instance" "rds" {
-  identifier                = "${var.project}-${var.environment}${var.name}-rds${var.number}-replica"
+  identifier                = "${var.environment}-${var.project}-${var.name}-replica-${var.number}"
   engine                    = "${var.engine}"
   instance_class            = "${var.size}"
   vpc_security_group_ids    = ["${aws_security_group.sg_rds.id}"]

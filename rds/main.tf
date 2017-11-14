@@ -89,7 +89,7 @@ resource "aws_db_parameter_group" "rds_postgres" {
 }
 
 resource "aws_db_instance" "rds" {
-  identifier                = "${var.environment}.${var.project}.${var.name}.master.${var.number}"
+  identifier                = "${var.environment}-${var.project}-${var.name}-master-${var.number}"
   allocated_storage         = "${var.storage}"
   engine                    = "${lookup(var.engines, var.rds_type)}"
   engine_version            = "${lookup(var.engine_versions, var.rds_type)}"
